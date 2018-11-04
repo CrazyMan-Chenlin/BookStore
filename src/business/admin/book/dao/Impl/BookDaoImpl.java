@@ -25,7 +25,10 @@ public class BookDaoImpl implements BookDao {
             throw new RuntimeException(e);
         }
     }
-    public void InsertBook(Books book){
+
+
+    @Override
+    public void insertBook(Books book){
         QueryRunner qr = new QueryRunner();
         Connection connection=null;
         try {

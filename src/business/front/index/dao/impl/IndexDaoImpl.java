@@ -29,7 +29,7 @@ public class IndexDaoImpl implements IndexDao {
     public List<Books> queryBooks(int TypeId) {
         List<Books> booksList = null;
         try {
-            StringBuffer sb =new StringBuffer("select distinct id,name,price,round(price*rebate,2)as currentPrice,img,rebate,stock,publisher,publishdate,author from books ");
+            StringBuffer sb =new StringBuffer("select id,name,price,round(price*rebate,2)as currentPrice,img,rebate,stock,publisher,publishdate,author from books ");
             if (TypeId!=0){
                 sb.append("where id in (select bookId from bookType where TypeId="+TypeId+")");
             }

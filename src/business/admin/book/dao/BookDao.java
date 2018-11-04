@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface BookDao {
     List<BookTypes> queryAllType();
-    void InsertBook(Books book);
+    void insertBook(Books book);
 }

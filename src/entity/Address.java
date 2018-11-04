@@ -1,5 +1,6 @@
 package entity;
 import java.util.Date;
+
 public class Address {
 
     public String getName() {

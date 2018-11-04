@@ -1,10 +1,10 @@
 package business.admin.admin.web;
 
-import business.admin.admin.service.Impl.AdminServiceImpl;
+import business.admin.admin.service.AdminService;
+import business.admin.admin.service.impl.AdminServiceImpl;
 import entity.Admin;
 import util.BaseServlet;
 import util.MD5Util;
-import util.WebUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+/**
+ * @author chenlin
+ */
 @WebServlet(name = "/admin",urlPatterns = "/adminLogin")
 public class AdminServlet extends BaseServlet {
+    private AdminService adminService = new AdminServiceImpl();
     private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
-        AdminServiceImpl adminService = new AdminServiceImpl();
         Admin admin =adminService.queryAdmin(name);
         if (admin!=null){
             String password = request.getParameter("password");

@@ -1,9 +1,9 @@
 package business.admin.book.web;
-import business.admin.book.service.Impl.BookServiceImpl;
+import business.admin.book.service.BookService;
+import business.admin.book.service.impl.BookServiceImpl;
 import entity.BookTypes;
 import entity.Books;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
@@ -18,12 +18,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+/**
+ * @author chenlin
+ */
 @WebServlet(name = "BookServlet",urlPatterns = "/admin/book")
 @SuppressWarnings("unchecked")
 public class BookServlet extends BaseServlet {
-        private static BookServiceImpl bookService = new BookServiceImpl();
+        private BookService bookService = new BookServiceImpl();
     private void queryAllTypes(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         List<BookTypes> bookTypes = bookService.queryAllType();
         request.setAttribute("bookTypes",bookTypes);
@@ -61,7 +63,6 @@ public class BookServlet extends BaseServlet {
                         continue;
                     }if (item.getFieldName().equals("types")){
                          typeId.add(Integer.parseInt(item.getString("utf-8")));
-                         continue;
                     }
                 }else{
                     String fileName = item.getName();
@@ -73,7 +74,7 @@ public class BookServlet extends BaseServlet {
                 }
             }
             books.setTypeId(typeId);
-            bookService.InsertBook(books);
+            bookService.insertBook(books);
         } catch (Exception e) {
             e.printStackTrace();
         }

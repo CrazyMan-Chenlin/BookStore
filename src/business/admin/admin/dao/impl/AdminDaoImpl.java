@@ -1,4 +1,4 @@
-package business.admin.admin.dao.Impl;
+package business.admin.admin.dao.impl;
 
 import business.admin.admin.dao.AdminDao;
 import entity.Admin;
@@ -8,6 +8,9 @@ import util.JdbcUitl;
 
 import java.sql.SQLException;
 
+/**
+ * @author chenlin
+ */
 public class AdminDaoImpl implements AdminDao {
     @Override
     public Admin queryAdmin(String name) {

@@ -1,4 +1,4 @@
-package business.admin.book.dao.Impl;
+package business.admin.book.dao.impl;
 
 import business.admin.book.dao.BookDao;
 import entity.BookTypes;
@@ -12,6 +12,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * @author chenlin
+ */
 public class BookDaoImpl implements BookDao {
 
     @Override

@@ -1,6 +1,7 @@
 package business.admin.type.web;
 
-import business.admin.type.service.Impl.TypeServiceImpl;
+import business.admin.type.service.TypeService;
+import business.admin.type.service.impl.TypeServiceImpl;
 import entity.BookTypes;
 import util.BaseServlet;
 import util.WebUtil;
@@ -12,9 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author chenlin
+ */
 @WebServlet(name = "/type",urlPatterns = "/admin/type")
 public class Type extends BaseServlet {
-    static TypeServiceImpl typeService = new TypeServiceImpl();
+    private TypeService typeService = new TypeServiceImpl();
     private void queryTypes(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         List<BookTypes> bookTypes = typeService.queryAll();
         request.setAttribute("types",bookTypes);

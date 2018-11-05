@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * @author chenlin
+ */
 public class Admin {
     public String getId() {
         return id;

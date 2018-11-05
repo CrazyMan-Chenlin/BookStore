@@ -1,4 +1,5 @@
 package business.front.index.service.impl;
+import business.front.index.dao.IndexDao;
 import business.front.index.dao.impl.IndexDaoImpl;
 import business.front.index.service.IndexService;
 import entity.BookTypes;
@@ -6,8 +7,11 @@ import entity.Books;
 
 import java.util.List;
 
+/**
+ * @author chenlin
+ */
 public class IndexServiceImpl implements IndexService {
-    static IndexDaoImpl bookTypesDao = new IndexDaoImpl();
+    private IndexDao bookTypesDao = new IndexDaoImpl();
     @Override
     public List<BookTypes> queryAll() {
 
@@ -15,8 +19,8 @@ public class IndexServiceImpl implements IndexService {
         return bookTypes;
     }
     @Override
-    public List<Books> queryBooks(int TypeId) {
-        List<Books> books = bookTypesDao.queryBooks(TypeId);
+    public List<Books> queryBooks(int typeId) {
+        List<Books> books = bookTypesDao.queryBooks(typeId);
         return books;
     }
 

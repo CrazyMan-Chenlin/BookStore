@@ -1,11 +1,15 @@
-package business.front.address.service.Impl;
-import business.front.address.dao.Impl.AddressDaoImpl;
+package business.front.address.service.impl;
+import business.front.address.dao.AddressDao;
+import business.front.address.dao.impl.AddressDaoImpl;
 import business.front.address.service.AddressService;
 import entity.Address;
 import java.util.List;
 
+/**
+ * @author chenlin
+ */
 public class AddressServiceImpl implements AddressService {
-     private static AddressDaoImpl addressDao = new AddressDaoImpl();
+     private AddressDao addressDao = new AddressDaoImpl();
     @Override
     public void insert(Address address)  {
             addressDao.insert(address);

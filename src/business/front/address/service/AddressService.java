@@ -5,6 +5,9 @@ import exception.MaxAddressException;
 
 import java.util.List;
 
+/**
+ * @author chenlin
+ */
 public interface AddressService {
     void insert(Address address) throws MaxAddressException;
     List<Address> queryAddress(int userId);

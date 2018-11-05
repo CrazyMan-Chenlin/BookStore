@@ -1,7 +1,7 @@
 package business.front.order.web;
 
-import business.front.order.dao.Impl.OrderDaoImpl;
-import business.front.order.service.Impl.OrderServiceImpl;
+import business.front.order.service.OrderService;
+import business.front.order.service.impl.OrderServiceImpl;
 import entity.Books;
 import entity.OrderLine;
 import entity.Orders;
@@ -17,9 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * @author chenlin
+ */
 @WebServlet(name = "order",urlPatterns = "/user/order")
 public class OrderServlet extends BaseServlet {
-    OrderServiceImpl orderService = new OrderServiceImpl();
+    private OrderService orderService = new OrderServiceImpl();
     private  void toOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String consignee = request.getParameter("consignee");
         Orders order = new Orders();

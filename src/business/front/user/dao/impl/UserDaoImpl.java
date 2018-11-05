@@ -1,4 +1,4 @@
-package business.front.user.dao.Impl;
+package business.front.user.dao.impl;
 
 import business.front.user.dao.UserDao;
 import entity.User;
@@ -9,10 +9,15 @@ import util.JdbcUitl;
 
 import java.sql.SQLException;
 
+/**
+ * @author chenlin
+ */
 public class UserDaoImpl extends BaseDao<User> implements UserDao  {
+    private QueryRunner qr = new QueryRunner(JdbcUitl.getDataSource());
+    @Override
     public User query(String username) {
         try {
-            QueryRunner qr = new QueryRunner(JdbcUitl.getDataSource());
+
             String sql = "select * from User where username=?";
             User user = (User) qr.query(sql, new BeanHandler(User.class), new Object[]{username});
             return user;
@@ -21,7 +26,6 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao  {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public void insert(User user) {
         super.insert(user);
@@ -29,7 +33,6 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao  {
 
     @Override
     public User query(int id) throws SQLException {
-        QueryRunner qr = new QueryRunner(JdbcUitl.getDataSource());
         String sql = "select * from User where id=?";
         User user = (User) qr.query(sql, new BeanHandler(User.class), new Object[]{id});
         return user;

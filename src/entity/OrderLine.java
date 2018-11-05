@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * @author chenlin
+ */
 public class OrderLine {
     public String getId() {
         return id;

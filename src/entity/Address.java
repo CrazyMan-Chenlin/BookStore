@@ -1,6 +1,9 @@
 package entity;
 import java.util.Date;
 
+/**
+ * @author chenlin
+ */
 public class Address {
 
     public String getName() {

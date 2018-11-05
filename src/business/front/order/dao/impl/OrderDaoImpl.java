@@ -1,4 +1,4 @@
-package business.front.order.dao.Impl;
+package business.front.order.dao.impl;
 
 import business.front.index.dao.impl.IndexDaoImpl;
 import business.front.order.dao.OrderDao;
@@ -9,7 +9,6 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import util.BaseDao;
 import util.JdbcUitl;
 import util.WebUtil;
 
@@ -20,8 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 @SuppressWarnings("unchecked")
 public class OrderDaoImpl  implements OrderDao {
-    QueryRunner qr=new QueryRunner();
-
+    private QueryRunner qr=new QueryRunner();
     @Override
     public void saveOrder(Orders order) {
         Connection connection=null;
@@ -50,18 +48,33 @@ public class OrderDaoImpl  implements OrderDao {
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
+    @Override
      public List<Orders> queryOrder(int userId){
-         try {
-             Connection connection = JdbcUitl.getDataSource().getConnection();
+        Connection connection=null;
+        try {
+              connection= JdbcUitl.getDataSource().getConnection();
              String sql = "select * from orders where userid=?";
             return  (List<Orders>)qr.query(connection,sql,new BeanListHandler(Orders.class),new Object[]{userId});
          } catch (SQLException e) {
              e.printStackTrace();
              throw  new RuntimeException(e);
-         }
+         }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
      }
+     @Override
      public Orders queryDetail(String id) {
          Connection connection = null;
          try {
@@ -82,16 +95,30 @@ public class OrderDaoImpl  implements OrderDao {
                  e1.printStackTrace();
              }
              throw new RuntimeException(e);
+         }finally {
+             try {
+                 connection.close();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }
          }
      }
-
+@Override
     public void delOrder (String id) {
+    Connection connection=null;
         try {
-            Connection connection = JdbcUitl.getDataSource().getConnection();
+             connection= JdbcUitl.getDataSource().getConnection();
             String sql = "delete from orders where id=?";
             qr.update(connection,sql,new Object[]{id});
+
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
     }

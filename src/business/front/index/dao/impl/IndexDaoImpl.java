@@ -10,9 +10,12 @@ import util.JdbcUitl;
 import java.awt.print.Book;
 import java.sql.SQLException;
 import java.util.List;
+/**
+ * @author chenlin
+ */
 @SuppressWarnings("unchecked")
 public class IndexDaoImpl implements IndexDao {
-   static QueryRunner qr=new QueryRunner(JdbcUitl.getDataSource());
+   private  QueryRunner qr=new QueryRunner(JdbcUitl.getDataSource());
     @Override
     public List<BookTypes> queryAll() {
         try {
@@ -24,8 +27,8 @@ public class IndexDaoImpl implements IndexDao {
             throw  new RuntimeException(e);
         }
     }
-    //通过子查询实现功能
-
+     @Override
+     /*通过子查询实现功能*/
     public List<Books> queryBooks(int TypeId) {
         List<Books> booksList = null;
         try {
@@ -40,6 +43,7 @@ public class IndexDaoImpl implements IndexDao {
         return booksList;
     }
     //通过id查询图书
+    @Override
     public Books queryBook(String id) {
         try {
             String sql="select id,name,price,round(price*rebate,2)as currentPrice,img,rebate," +

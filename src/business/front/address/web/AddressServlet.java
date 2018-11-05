@@ -1,7 +1,9 @@
 package business.front.address.web;
-import business.front.address.service.Impl.AddressServiceImpl;
+import business.front.address.service.AddressService;
+import business.front.address.service.impl.AddressServiceImpl;
 import entity.Address;
 import entity.User;
+import exception.MaxAddressException;
 import util.BaseServlet;
 import util.WebUtil;
 import javax.servlet.ServletException;
@@ -13,10 +15,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author chenlin
+ */
 @WebServlet(name = "address",urlPatterns = "/user/address")
 public class AddressServlet extends BaseServlet {
-    static  AddressServiceImpl addressService = new AddressServiceImpl();
-    private  void addAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   private AddressService addressService = new AddressServiceImpl();
+    private  void addAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, MaxAddressException {
         Address address = WebUtil.copyRequestToBean(request, Address.class);
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");

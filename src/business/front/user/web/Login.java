@@ -1,7 +1,7 @@
 package business.front.user.web;
 
-import business.front.user.dao.Impl.UserDaoImpl;
-import business.front.user.service.Impl.UserServiceImpl;
+import business.front.user.service.UserService;
+import business.front.user.service.impl.UserServiceImpl;
 import entity.User;
 import util.BaseServlet;
 import util.MD5Util;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 @WebServlet(name = "Login",urlPatterns = "/Login")
 public class Login extends BaseServlet {
+    private UserService userService = new UserServiceImpl();
     private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         String newCode = (String) session.getAttribute("newCode");
@@ -22,7 +23,6 @@ public class Login extends BaseServlet {
         if(newCode.equals(validateCode)){
             username = request.getParameter("username");
             password = request.getParameter("password");
-            UserServiceImpl userService = new UserServiceImpl();
             User user = userService.query(username);
             if (user!=null){
                 if (MD5Util.md5(password).equals(user.getPassword())){

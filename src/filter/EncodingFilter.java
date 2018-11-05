@@ -12,8 +12,7 @@ import java.util.Set;
 
 @WebFilter(filterName = "EncodingFilter",urlPatterns = "/*")
 public class EncodingFilter implements Filter {
-    public void destroy() {
-    }
+    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
        //使用装饰者模式来修改getParameter方法
         HttpServletRequest request=(HttpServletRequest)req;
@@ -21,8 +20,6 @@ public class EncodingFilter implements Filter {
         MyRequest myRequest=new MyRequest(request);
         myRequest.setCharacterEncoding("utf-8");
         chain.doFilter(myRequest, resp);
-    }
-    public void init(FilterConfig config) throws ServletException {
     }
 }
 class MyRequest extends HttpServletRequestWrapper{

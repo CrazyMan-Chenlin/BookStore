@@ -15,9 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author chenlin
+ */
 @WebServlet(name = "index",urlPatterns = "/index")
 public class index extends BaseServlet  {
-   static IndexServiceImpl indexService =new IndexServiceImpl();
+   private IndexService indexService =new IndexServiceImpl();
     private void queryAllTypes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<BookTypes> bookTypes = indexService.queryAll();

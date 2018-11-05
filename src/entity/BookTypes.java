@@ -3,6 +3,9 @@ package entity;
 import util.ColumnName;
 import util.TableName;
 
+/**
+ * @author chenlin
+ */
 @TableName(name="types")
 public class BookTypes {
     public int getId() {

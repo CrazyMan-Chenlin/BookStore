@@ -1,10 +1,14 @@
-package business.front.order.service.Impl;
-import business.front.order.dao.Impl.OrderDaoImpl;
+package business.front.order.service.impl;
+import business.front.order.dao.OrderDao;
+import business.front.order.dao.impl.OrderDaoImpl;
 import business.front.order.service.OrderService;
 import entity.Orders;
 import java.util.List;
+/**
+ * @author chenlin
+ */
 public class OrderServiceImpl implements OrderService {
-    OrderDaoImpl orderDao = new OrderDaoImpl();
+    private OrderDao orderDao = new OrderDaoImpl();
     @Override
     public void saveOrder(Orders order) {
         orderDao.saveOrder(order);

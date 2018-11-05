@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * @author chenlin
+ */
 @SuppressWarnings("unchecked")
 @WebServlet(name = "buy",urlPatterns = "/user/buy")
 public class buy extends BaseServlet {

@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-//String 字符串，所以使用以下格式{"",""}
+/**
+ * @author chenlin
+ */ //String 字符串，所以使用以下格式{"",""}
 @WebFilter(filterName = "UserFilter",urlPatterns = {"/user/*","/pages/front/user/*"})
 public class UserFilter implements Filter {
-    public void destroy() {
-    }
+    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
 
         //判断Session有没有存在
@@ -33,10 +34,4 @@ public class UserFilter implements Filter {
         chain.doFilter(req, resp);
 
     }
-
-
-    public void init(FilterConfig config) throws ServletException {
-
-    }
-
 }

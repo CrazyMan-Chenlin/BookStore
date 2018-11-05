@@ -1,6 +1,7 @@
 package business.front.user.web;
 
-import business.front.user.service.Impl.UserServiceImpl;
+import business.front.user.service.UserService;
+import business.front.user.service.impl.UserServiceImpl;
 import entity.User;
 import exception.NameExitException;
 import util.BaseServlet;
@@ -16,6 +17,7 @@ import java.io.IOException;
 
 @WebServlet(name = "Register",urlPatterns = "/Register")
 public class register extends BaseServlet {
+    private UserService userService = new UserServiceImpl();
     public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         String newCode = (String) session.getAttribute("newCode");
@@ -23,7 +25,6 @@ public class register extends BaseServlet {
         if (newCode.equals(sCode)){
             User user = WebUtil.copyRequestToBean(request, User.class);
             user.setPassword(MD5Util.md5(user.getPassword()));
-            UserServiceImpl userService = new UserServiceImpl();
             try {
                 userService.insert(user);
                 response.sendRedirect(request.getContextPath()+"/pages/front/login/login.jsp");

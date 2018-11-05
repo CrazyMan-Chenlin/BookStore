@@ -1,12 +1,9 @@
 package test.business.front.address.dao.Impl; 
 
-import business.front.address.dao.Impl.AddressDaoImpl;
-import entity.Address;
+import business.front.address.dao.impl.AddressDaoImpl;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
-
-import java.util.List;
 
 /** 
 * AddressDaoImpl Tester. 

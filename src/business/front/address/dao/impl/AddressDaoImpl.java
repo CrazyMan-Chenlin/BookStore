@@ -1,6 +1,7 @@
-package business.front.address.dao.Impl;
+package business.front.address.dao.impl;
 
-import business.front.user.dao.Impl.UserDaoImpl;
+import business.front.address.dao.AddressDao;
+import business.front.user.dao.impl.UserDaoImpl;
 
 import entity.Address;
 import entity.User;
@@ -13,9 +14,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author chenlin
+ */
 @SuppressWarnings("unchecked")
-public class AddressDaoImpl  {
-    static QueryRunner qr=new QueryRunner(JdbcUitl.getDataSource());
+public class AddressDaoImpl implements AddressDao {
+    private QueryRunner qr=new QueryRunner(JdbcUitl.getDataSource());
+    @Override
     public void insert(Address address) {
         try {
             String sql="insert into address values(?,?,?,?,?,?,?,?)";
@@ -26,6 +31,7 @@ public class AddressDaoImpl  {
             throw new RuntimeException(e);
         }
     }
+    @Override
     public List<Address> queryAddress(int userId)  {
         try {
             String sql="select * from address where userId=? ORDER BY mktime DESC";
@@ -36,8 +42,7 @@ public class AddressDaoImpl  {
             throw new RuntimeException(e);
         }
     }
-
-
+  @Override
     public void delete(String id) {
         try {
             String sql="delete from address where id=?";
@@ -46,6 +51,7 @@ public class AddressDaoImpl  {
             e.printStackTrace();
         }
     }
+    @Override
     public void updateDft(String id){
         Connection connection=null;
         try {
@@ -63,6 +69,12 @@ public class AddressDaoImpl  {
                 connection.rollback();
             } catch (SQLException e1) {
                 e1.printStackTrace();
+            }finally {
+                try {
+                    connection.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
     }
